@@ -6,12 +6,7 @@ describe Booking do
       let(:booking) { Booking.new }
 
       it "cannot be created when compulsory parameters are not provided" do
-        booking.save
-        expect(booking.errors.messages).to eq(
-          :room => ["can't be blank"],
-          :start =>["can't be blank"],
-          :end=>["can't be blank"],
-        )
+        expect { booking.save }.to raise_error(ActiveRecord::StatementInvalid)
       end
 
       it "creates the booking when assigned to an existing room" do

@@ -1,7 +1,6 @@
 class Booking < ApplicationRecord
   belongs_to :room
-  validates :room, :start, :end, :presence => true
-  validate :validate_availability
+  after_validation :validate_availability
 
 private
 
