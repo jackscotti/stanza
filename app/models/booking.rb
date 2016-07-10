@@ -1,6 +1,6 @@
 class Booking < ApplicationRecord
   belongs_to :room
-  after_validation :validate_availability
+  after_validation :validate_availability, :validate_date
 
 private
 
@@ -10,7 +10,7 @@ private
       self.room.bookings.each do |b|
         next if self == b
 
-        if b.start <= self.start && b.end >= self.end
+        if b.start_time <= self.start_time && b.end_time >= self.end_time
           errors.add(:room_availability, "the room is already booked")
         end
       end
