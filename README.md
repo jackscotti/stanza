@@ -9,8 +9,6 @@
 - Capacity
 
 ## Booking
-- Booker
-- Room
-- Attendees
+- Room (TODO: this could become more than one)
 - Start time
 - End time
