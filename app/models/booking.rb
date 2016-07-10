@@ -1,4 +1,4 @@
 class Booking < ApplicationRecord
   belongs_to :room
-  validates :room, :presence => true
+  validates :room, :start, :end, :presence => true
 end
