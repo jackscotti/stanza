@@ -1,5 +1,8 @@
-# boocker
+# Stanza
 
+A conference room management tool.
+
+# Objects
 
 ## Room
 - Name / Number
