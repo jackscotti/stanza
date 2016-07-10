@@ -16,4 +16,10 @@ private
       end
     end
   end
+
+  def validate_date
+    if start_time >= end_time
+      errors.add(:room_availability, "end time can't be earlier than start time")
+    end
+  end
 end

@@ -5,10 +5,6 @@ describe Booking do
     context "validates the presence of compulsory fields" do
       let(:booking) { Booking.new }
 
-      it "cannot be created when compulsory parameters are not provided" do
-        expect { booking.save }.to raise_error(ActiveRecord::StatementInvalid)
-      end
-
       it "creates the booking when assigned to an existing room" do
         booking.start_time = DateTime.now + 1.day - 1.hour
         booking.end_time = DateTime.now + 1.day + 1.hour
@@ -57,6 +53,22 @@ describe Booking do
         expect(booking_2.errors.messages).to eq(
           :room_availability => ["the room is already booked"]
         )
+      end
+    end
+
+    context "checks whether the date is valid" do
+      it "does not allow an end date that is earlier than the start_time date" do
+        booking = Booking.new
+        room = Room.new
+        room.save
+
+        booking.start_time = DateTime.now + 1.day + 1.hour
+        booking.end_time = DateTime.now + 1.day - 1.hour
+        booking.room = room
+
+        booking.save
+
+        expect(booking.errors.messages).not_to be_empty
       end
     end
   end
