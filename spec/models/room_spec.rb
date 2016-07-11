@@ -15,7 +15,7 @@ describe Room do
       )
       booking_2 = Booking.new(
         start_time: DateTime.now + 1.day - 1.hour,
-        end_time: DateTime.now + 1.day + 1.hour,
+        end_time: DateTime.now + 1.day + 3.hour,
         room: @room_2,
       )
 
@@ -25,7 +25,7 @@ describe Room do
       booking_2.save
     end
 
-    it "returns the availabilities when there are some" do
+    it "returns all rooms" do
       booking_start = DateTime.now + 2.day
       booking_end = DateTime.now + 2.day + 30.minutes
 
@@ -35,7 +35,20 @@ describe Room do
       ])
     end
 
-    it "returns an empty array when there are none" do
+    it "returns one room" do
+      booking_start = DDateTime.now + 1.day + 1.hour
+      booking_end = DateTime.now + 2.day + 2.hour
+
+      expect(Room.find_available_rooms(booking_start, booking_end)).to eq([
+        @room_1,
+      ])
+    end
+
+    it "returns no rooms" do
+      booking_start = DateTime.now + 1.day - 1.hour
+      booking_end = DateTime.now + 1.day + 1.hour
+
+      expect(Room.find_available_rooms(booking_start, booking_end)).to eq([])
     end
   end
 end
