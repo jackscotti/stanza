@@ -25,6 +25,7 @@ describe Room do
       booking_2.save
     end
 
+    # reword
     it "returns all rooms" do
       booking_start = DateTime.now + 2.day
       booking_end = DateTime.now + 2.day + 30.minutes
@@ -33,10 +34,14 @@ describe Room do
         @room_1,
         @room_2,
       ])
+
+      # Booking.where("start_time >= ? AND end_time <= ?", start_time, end_time)
+      # => []
     end
 
+    # reword
     it "returns one room" do
-      booking_start = DDateTime.now + 1.day + 1.hour
+      booking_start = DateTime.now + 1.day + 1.hour
       booking_end = DateTime.now + 2.day + 2.hour
 
       expect(Room.find_available_rooms(booking_start, booking_end)).to eq([
@@ -44,6 +49,7 @@ describe Room do
       ])
     end
 
+    # reword
     it "returns no rooms" do
       booking_start = DateTime.now + 1.day - 1.hour
       booking_end = DateTime.now + 1.day + 1.hour
